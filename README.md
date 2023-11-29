@@ -1,7 +1,3 @@
-# CA_House_Price_Prediction_Model
-The repository provides python notebook for running codes, readme file and folder containing results picture.
-
-
 ## Project Title
 
 # For ML Beginners: Predicting California House Pricing with Linear Regression Model
