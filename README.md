@@ -1,3 +1,4 @@
+
 ## Project Title
 
 # For ML Beginners: Predicting California House Pricing with Linear Regression Model
@@ -55,34 +56,61 @@ This dataset was obtained from the StatLib repository. [Link to the dataset](htt
 ### Target Variable
 
 The target variable is the median house value for California districts, expressed in hundreds of thousands of dollars ($100,000).
-## Model Performance Metric
+## **Model Optimization** 
 
-| Metric | Score   |
-|--------|---------|
-| R2     | 0.5937  |
-| MSE    | 0.5349  |
+We will run various machine learning techniques to optimize model performance.
 
-### Significance of Metrics
+### **Supervised learning**
 
-#### R-squared (R2)
+**Filter Based Method**: Calculates dependencies on each features (univariate). This method shows that by selecting top 7 features out of 8 available features generate highest R2 score. However, top 3 features provide optimum R2 score of 0.58 and at the same, our model is now dependent on only top 3 features (MedInncome, Longitude, Latitude).
 
-R-squared is a statistical measure that represents the proportion of the variance in the dependent variable that is predictable from the independent variable(s). An R2 score of 0.5857 indicates that approximately 58.57% of the variability in the target variable is explained by the model. A higher R2 score suggests a better fit of the model to the data.
+| K value | R2 Score   |
+|---------|------------|
+| 1       | 0.000513   |
+| 2       | 0.459036   |
+| 3       | 0.587496   |
+| 4       | 0.567125   |
+| 5       | 0.562701   |
+| 6       | 0.588210   |
+| 7       | 0.645204   |
+| 8       | 0.606695   |
 
-#### Mean Squared Error (MSE)
 
-Mean Squared Error is a measure of the average squared difference between the predicted and actual values. The MSE score of 0.5602 indicates a relatively low average squared error, suggesting that, on average, the model's predictions are close to the actual values. Lower MSE values are desirable as they indicate better model performance.
+**Pearson Correlation** : Here, we will find certain overlapping parameters that impact the outcome (Housing price) in a same degree. We will remove this features and then re-calculate R2 score.
 
-### Overall Significance
+- Before removing any features: R2 = 0.5866
+- Identified two pair of features: AveRooms and AveBedrms | Latitude and Longitude
+- After dropping AveRooms and Longitude: R2 = 0.5249
 
-- The R2 score provides an understanding of how well the independent variables explain the variability in the dependent variable.
-- The MSE score quantifies the average squared difference between predicted and actual values, giving insights into the accuracy of predictions.
-- A good model typically has a high R2 score and a low MSE, indicating a strong fit to the data and accurate predictions.
+This clearly shows feature removal has no impact on model performance improvement.
 
-These metrics collectively offer valuable insights into the model's performance and its ability to generalize well to new, unseen data.
+**Wrapper Based Methods**
+- Recurive Feature Elimination: R2 = 0.5826
+- Sequential Feature Selector: R2 = 0.5399
 
-**Explore, Collaborate, Contribute!**
+### **Unsuperervised**
+- PCA: Dimenisonality Reduction technique that transforms the features into a new space where we can select features on the basis of variance captured (eigen values)
+    - R2 Score: 0.6061
 
-**Happy Coding!**
+
+Overall, both supervised Filter based method and unsupervised PCA learning technique produces best R2 score for our learning model.
+
+| Learning Method                   | R2 Score   |
+|-----------------------------------|------------|
+| Filter Based Method (k=7)         | 0.6452     |
+| Filter Based Method (k=8)         | 0.6067     |
+| PCA                               | 0.6061     |
+| Filter Based Method (k=6)         | 0.5882     |
+| Filter Based Method (k=3)         | 0.5875     |
+| Pearson Correlation (Before)      | 0.5866     |
+| Recursive Feature Elimination     | 0.5826     |
+| Filter Based Method (k=4)         | 0.5671     |
+| Filter Based Method (k=5)         | 0.5627     |
+| Sequential Feature Selector       | 0.5399     |
+| Pearson Correlation (After)       | 0.5249     |
+| Filter Based Method (k=2)         | 0.459      |
+| Filter Based Method (k=1)         | 0.0005     |
+
 
 ## Acknowledgements
 
@@ -94,3 +122,4 @@ These metrics collectively offer valuable insights into the model's performance 
 ## License
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
